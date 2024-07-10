@@ -17,11 +17,10 @@ class DeliveryTimeResponse(BaseModel):
 @app.post("/delivery_time", response_model=DeliveryTimeResponse)
 async def delivery_time(request: DeliveryTimeRequest):
     try:
-        # Extract the parameters from the request
         seller_zip_code_prefix = request.seller_zip_code_prefix
         customer_zip_code_prefix = request.customer_zip_code_prefix
         delivery_distance_km = request.delivery_distance_km
-        
+
         delivery_time = delivery_distance_km * 1.2  # Example logic
 
         # Return the result as JSON
