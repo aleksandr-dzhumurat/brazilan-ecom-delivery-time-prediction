@@ -82,6 +82,37 @@ make tests
 make integration-tests
 ```
 
+# Code quality 
+
+Linters runs `autopep8 --in-place --aggressive --aggressive --recursive .`
+```shell
+make lint
+```
+
+Pre-commit hooks: every commit 
+```shell
+git commit -m 'Add new files'
+```
+
+Result
+```
+Commit message must contain 'Feature' or 'Fix'.
+```
+
+Correct version: `git commit -m 'Feature: code linters' `
+
+Dockerize the model
+
+Test from curl
+```
+curl -X POST http://127.0.0.1:8090/delivery_time \
+    -H "Content-Type: application/json" \
+    -d '{"seller_zip_code_prefix":12345, "customer_zip_code_prefix":54321, "delivery_distance_km":50}'
+```
+
+# Dagster
+
+Under construction
 
 https://www.skytowner.com/explore/getting_started_with_dagster
 
@@ -96,10 +127,3 @@ pip install -r dagster_requirements.txt
 Materialization
 http://localhost:3000/assets
 
-
-Test from curl
-```
-curl -X POST http://127.0.0.1:8090/delivery_time \
-    -H "Content-Type: application/json" \
-    -d '{"seller_zip_code_prefix":12345, "customer_zip_code_prefix":54321, "delivery_distance_km":50}'
-```
