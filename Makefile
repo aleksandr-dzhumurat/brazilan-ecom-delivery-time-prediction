@@ -61,6 +61,8 @@ run-dagster:
 build-prod:
 	docker build -f ${CURRENT_DIR}/services/production/Dockerfile -t adzhumurat/delivery_time_prediction:latest .
 
+
+
 prepare-prod: build-prod
 	docker push adzhumurat/delivery_time_prediction:latest
 
