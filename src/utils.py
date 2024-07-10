@@ -91,6 +91,7 @@ def read_data(data_path, start_dt, end_dt):
                 df, dt_col='order_purchase_timestamp',
                 date_filter={'start_date': start_dt, 'end_date': end_dt}
         )
+    
     return df
 
 def save_data(df, output_file):
