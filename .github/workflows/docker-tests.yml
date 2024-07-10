@@ -20,7 +20,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
-        run: make build-prod
+        run: make build-ci
 
       - name: Run tests in Docker container
-        run: docker run -it adzhumurat/delivery_time_prediction:latest pytest src/tests/
+        run: docker run -it ci:latest pytest src/tests/

@@ -66,3 +66,6 @@ prepare-prod: build-prod
 
 run-prod:
 	docker run -p 8090:8090 -it --rm adzhumurat/delivery_time_prediction:latest
+
+build-ci:
+	docker build -f ${CURRENT_DIR}/services/ci/Dockerfile -t ci:latest .
