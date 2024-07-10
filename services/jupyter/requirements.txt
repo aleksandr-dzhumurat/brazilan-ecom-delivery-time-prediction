@@ -1,0 +1,12 @@
+
+numpy
+scipy
+scikit-learn
+mlflow[pipelines]==2.7.1 # 2.12.2 
+minio
+boto3
+hyperopt
+jupyter
+catboost
+pyarrow
+pandas

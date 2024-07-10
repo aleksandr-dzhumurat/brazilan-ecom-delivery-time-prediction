@@ -1,0 +1,22 @@
+model_file_name: model.pkl
+data_params:
+  date_start: '2017-02-01'
+  date_end: '2017-11-30'
+  train_date_start: '2017-02-01'
+  train_date_end: '2017-02-28'
+  valid_date_start: '2017-03-01'
+  valid_date_end: '2017-03-31'
+  backfill_date_start: '2017-04-01'
+  backfill_date_end: '2017-11-30'
+experiment_tracking:
+  experiment_name: 'catboost-params'
+catboost_params:
+  iterations: 300
+  learning_rate: 0.229
+  depth: 8.0
+  l2_leaf_reg: 2.45
+categorical:
+  - seller_zip_code_prefix
+  - customer_zip_code_prefix
+numerical:
+  - delivery_distance_km
