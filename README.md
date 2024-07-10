@@ -113,9 +113,9 @@ Correct version: `git commit -m 'Feature: code linters' `
 
 # Dockerize the model
 
-Build production image
+Build production image and push to Docker registry [adzhumurat/delivery_time_prediction](https://hub.docker.com/repository/docker/adzhumurat/delivery_time_prediction/general)
 ```shell
-make build-production
+make prepare-prod
 ```
 
 Test from curl
