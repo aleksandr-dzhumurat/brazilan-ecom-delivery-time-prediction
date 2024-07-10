@@ -89,7 +89,17 @@ Linters runs `autopep8 --in-place --aggressive --aggressive --recursive .`
 make lint
 ```
 
-Pre-commit hooks: every commit 
+Pre-commit hooks: every commit has to be checked with `.git/hooks/commit-msg`
+
+```shell
+start_check=$(head -1 $1 | grep -qiE "^(Feature|Fix):")
+if [ $? -ne 0 ]; then
+    echo "Commit message should start with 'Feature:' or 'Fix:'." 1>&2
+    exit 1
+fi
+```
+
+Example
 ```shell
 git commit -m 'Add new files'
 ```
@@ -101,7 +111,12 @@ Commit message must contain 'Feature' or 'Fix'.
 
 Correct version: `git commit -m 'Feature: code linters' `
 
-Dockerize the model
+# Dockerize the model
+
+Build production image
+```shell
+make build-production
+```
 
 Test from curl
 ```
