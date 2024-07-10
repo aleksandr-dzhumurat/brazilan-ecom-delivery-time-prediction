@@ -1,3 +1,4 @@
+root_data_dir: /srv/data
 model_file_name: model.pkl
 data_params:
   date_start: '2017-02-01'

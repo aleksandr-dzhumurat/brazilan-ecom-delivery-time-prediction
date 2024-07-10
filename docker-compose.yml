@@ -36,7 +36,7 @@ services:
     volumes:
       - ./services/grafana/config/grafana_datasources.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
       - ./services/grafana/config/grafana_dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
-      - ./dashboards:/opt/grafana/dashboards
+      - ./services/grafana/dashboards:/opt/grafana/dashboards
     networks:
       - prj_network
     restart: always
@@ -95,11 +95,11 @@ services:
       --no-browser
       --NotebookApp.token=''
       --NotebookApp.password=''
-  service:
+  dev:
     build:
       context: .
     depends_on:
-      # - mlflow
+      - mlflow
       - postgres
       - grafana
       - localstack
