@@ -1,35 +1,32 @@
 # criteo_uplift_model
-Uplift model trained on criteo dataset
-
-https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
 [Scoring criteria](https://github.com/aleksandr-dzhumurat/mlops-zoomcamp/tree/main/07-project)
 
-Create env
+Delivery time prediction model trained on brazilian ecommerse dataset
 
-```shell
-brew install openssl xz gdbm &&
-pyenv install 3.11 && \
-pyenv virtualenv 3.11 criteo-env
-```
 
-Install python requirements
-```
-source ~/.pyenv/versions/criteo-env/bin/activate && \
-pip install -r requirements.txt
-```
-
-# Train model
+First, prepare directory structure for data
 
 ```shell
 make prepare-dirs
 ```
 
+Download `.zip` archive from the [kaggle competition](
+Download data from https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and put to the directory data_store/dataset. 
+
+Build and run docker image for local development
 ```shell
-python src/train_test_split.py
+make run-dev
 ```
 
-# Set up services
+Run data extraction script
+
+```shell
+make prepare-data
+```
+
+
+# Set up MLFlow for an experiment tracking
 
 Postgres
 
@@ -47,37 +44,42 @@ Terminate ML flow, run Jupyter
 make run-jupyter
 ```
 
-Open [0.0.0.0:8899](http://0.0.0.0:8899/)
+Open [EDA](http://localhost:8899/notebooks/EDA.ipynb) and view charts and dasboards
 
-[Dataset](https://drive.google.com/drive/folders/1cuKmgr7OQDbeninjMudUzm32xWcb_Wg7)
-
-
-https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
-
+Run params search. After script finished check [MLFlow](http://localhost:8000/)
 
 ```shell
-DATA_PATH=$(pwd)/data_store/dataset python src/extract_data.py
+make run params-search
 ```
 
+Train and register best model
 ```shell
-docker-compose build service
+ make register-model
 ```
 
+# Grafana monitoring
+
+Backfill data and check dashboards in [grafana](http://localhost:3000/)
 
 ```shell
-docker-compose run service
+make backfill
 ```
 
-```shell
-docker exec -it ef395769ed2a python3 src/prepare_data.py /srv/src/config.yml
-```
+Eval grafana dashboards
+
+# Tests
+
+
+/tests - unitests for ci/cd
 
 ```shell
-docker exec -it ef395769ed2a python3 src/hyperopt_params_search.py /srv/src/config.yml
+make tests
 ```
 
+/integration tests - for local usage
+
 ```shell
-docker exec -it ef395769ed2a pytest tests/
+make integration-tests
 ```
 
 
@@ -93,32 +95,6 @@ pip install -r dagster_requirements.txt
 
 Materialization
 http://localhost:3000/assets
-
-# Tests
-
-/tests - unitests for ci/cd
-/integration tests - for local usage
-
-# Backfill
-
-Eval grafana dashboards
-
-```shell
-docker exec -it 0e7536d1d9b0 python3 src/batch_prediction_backfill.py /srv/src/config.yml
-```
-
-```shell
-docker exec -it 711cba360a17 pytest integration_tests/
-```
-
-Create bucket
-```shell
-docker exec -it 3c63afa46b27 awslocal --endpoint-url=http://localhost:4566 s3 mb s3://delivery-prediction
-```
-
-```shell
-docker exec -it 711cba360a17 pytest src/integration_tests/
-```
 
 
 Test from curl

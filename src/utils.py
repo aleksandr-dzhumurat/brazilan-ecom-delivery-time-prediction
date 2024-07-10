@@ -46,7 +46,7 @@ def filter_df_by_date(df, dt_col, date_filter):
         df = df.drop(df[mask].index)
     return df
 
-def train_and_save_model(train_df, config, model_path, reference_data_path):
+def train_and_save_model(train_df, config, model_path):
     if os.path.exists(model_path):
         return
     params = config['catboost_params']
