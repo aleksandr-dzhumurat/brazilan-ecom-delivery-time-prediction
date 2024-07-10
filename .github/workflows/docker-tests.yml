@@ -23,4 +23,4 @@ jobs:
         run: make build-ci
 
       - name: Run tests in Docker container
-        run: docker run -it ci:latest pytest src/tests/
+        run: docker run --rm ci:latest pytest src/tests/
