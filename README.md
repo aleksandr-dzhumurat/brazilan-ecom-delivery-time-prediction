@@ -47,8 +47,7 @@ First, prepare directory structure for data. Command will create `data_store` di
 make prepare-dirs
 ```
 
-Download `.zip` archive from the [kaggle competition](
-Download data from https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and put to the directory `data_store/dataset`. 
+Download `.zip` archive from the [kaggle competition](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and put the archive to the directory `data_store/dataset`. 
 
 Build and run docker image for local development
 ```shell
@@ -92,13 +91,17 @@ Terminate ML flow, run Jupyter
 make run-jupyter
 ```
 
-Open [EDA](http://localhost:8899/notebooks/EDA.ipynb) and view charts and dasboards
+Open [EDA](./src/notebooks/EDA.ipynb) and view charts and dasboards
 
 Run params search. After script finished check [MLFlow](http://localhost:8000/)
 
 ```shell
 make run params-search
 ```
+
+We will auromatically change best model params (== with lowest RMSE)
+
+![alt text](mlflow.png)
 
 Train and register best model
 ```shell
@@ -126,6 +129,11 @@ Test from curl
 curl -X POST http://127.0.0.1:8090/delivery_time \
     -H "Content-Type: application/json" \
     -d '{"seller_zip_code_prefix":12345, "customer_zip_code_prefix":54321, "delivery_distance_km":50}'
+```
+
+Result: delivery time predicted in JSON format!
+```json
+{"seller_zip_code_prefix":12345,"customer_zip_code_prefix":54321,"delivery_distance_km":50,"delivery_time":60.0}
 ```
 
 
