@@ -4,11 +4,15 @@
 
 This project focuses on developing and deploying a delivery time prediction model using e-commerce data.
 
-The aim is to predict the delivery time for orders based on various factors
+The aim is to *predict the delivery time* for orders based on various factors
 
 * customer ZIP-code
 * seller XIP-code
 * delivery distance
+
+We are implement
+* batch prediction (3-6k orders per month)
+* realtime FastAPI prediction service
 
 
 Model enhances the efficiency of logistics and improving customer satisfaction.
